@@ -1,14 +1,14 @@
 // #include <Wire.h>
 
 // Gleichstrommotor L
-int GSML = 10;
-int in1 = 9;
-int in2 = 8;
+int GSML = 6;
+int in1 = 10;
+int in2 = 9;
 
 // Gleichstrommotor R
 int GSMR = 5;
-int in3 = 7;
-int in4 = 6;
+int in3 = 8;
+int in4 = 7;
 
 int speedCar = 75;
 
@@ -35,12 +35,13 @@ void setup()
 void loop()
 {
   carDrive(100, FORWARD);
-  delay(200);
+  delay(1000);
   carStop();
+  delay(50);
   carDrive(100, LEFT);
-  delay(300);
+  delay(500);
   carStop();
-  delay(150);
+  delay(100);
 } 
 void carDrive(int speed_Car, car_direction dir) {
   switch(dir) {
