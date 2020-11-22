@@ -1,8 +1,11 @@
-int trigger = 12;
-int echo = 11;
-long duration;
+#include <Mouse.h>
 
-long distance;
+const int trigger = A0;
+const int echo = A1;
+
+
+
+uint32_t gul_distance;
 
 void setup() {
   Serial.begin(9600);
@@ -11,17 +14,27 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(trigger, LOW);              // Set Trigger to Low to get a clear signal
-  delay(10);                                
-  digitalWrite(trigger, HIGH);             // Set Trigger to High to send ultrasonic waves
-  delay(10);                               
-  digitalWrite(trigger, LOW);              // End sendings ultrasonic waves
+  Serial.println("Begin");
+
   
-  duration = pulseIn(echo, HIGH);           // measure incomming pulses from the sensor
-  distance = (duration / 2) / 29.1;         // convert reseaved signal. (elapsed way / (ultrasonic moves 29.1 ms/cm)
+  Serial.print(gul_distance);                  // Den Weg in Zentimeter ausgeben
+  Serial.println(" cm");
+  Serial.println("End\n");
 
-  Serial.print(distance);            // Den Weg in Zentimeter ausgeben
-  Serial.println(" cm");               //
+  delay(1000);
+}
 
-  delay(500
+/**
+ * Measuge the distance using the Ultrawave sensor HC-SR04
+ * Writes the measured distance into a global variable "gul_distance"
+ */
+void measureDistance() {
+  digitalWrite(trigger, LOW);                 // Set Trigger to Low to get a clear signal
+  delayMicroseconds(10);
+  digitalWrite(trigger, HIGH);                // Set Trigger to High to send ultrasonic waves
+  delayMicroseconds(250);
+  digitalWrite(trigger, LOW);                 // End sendings ultrasonic waves
+
+  uint32_t ul_duration = pulseIn(echo, HIGH);         // measure incomming pulses from the sensor
+  gul_distance = (ul_duration / 2) / 29.1;   // convert reseaved signal. (elapsed way / (ultrasonic moves 29.1 ms/cm)
 }
