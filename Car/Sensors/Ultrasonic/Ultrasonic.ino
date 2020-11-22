@@ -1,5 +1,3 @@
-#include <Mouse.h>
-
 const int trigger = A0;
 const int echo = A1;
 
@@ -14,14 +12,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Begin");
 
-  
-  Serial.print(gul_distance);                  // Den Weg in Zentimeter ausgeben
-  Serial.println(" cm");
-  Serial.println("End\n");
-
-  delay(1000);
 }
 
 /**
@@ -35,6 +26,7 @@ void measureDistance() {
   delayMicroseconds(250);
   digitalWrite(trigger, LOW);                 // End sendings ultrasonic waves
 
-  uint32_t ul_duration = pulseIn(echo, HIGH);         // measure incomming pulses from the sensor
-  gul_distance = (ul_duration / 2) / 29.1;   // convert reseaved signal. (elapsed way / (ultrasonic moves 29.1 ms/cm)
+  uint32_t ul_duration;
+  ul_duration = pulseIn(echo, HIGH); // measure incomming pulses from the sensor
+  gul_distance = (ul_duration / 2) / 29.1;    // convert reseaved signal. (elapsed way / (ultrasonic moves 29.1 ms/cm)
 }
